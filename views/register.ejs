@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | BloodCamp</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="registerPage">
+      <div class="registerContainer">
+        <div class="registerHeading">REGISTER</div>
+        <form class="registerForm" id="registerForm" method="post" action="/users" onsubmit="return handleSubmit(event);">
+          <input type="text" placeholder="Enter your Name" name="fullname"/>
+          <input type="password" placeholder="Enter your Password" name="password" />
+          <input type="text" placeholder="Enter your Aadhaar No." name="aadhaar" />
+          <input type="text" placeholder="Enter your Age" name="age"/>
+          <div class="smallInput">
+            <input type="text" placeholder="Height(cm)" name="height"/>
+            <input type="text" placeholder="Weight(kg)" name="weight"/>
+          </div>
+          <input type="text" placeholder="Enter your Credit Card No."  name="creditNo"/>
+
+          <div class="labelDiv">
+            <label for="bloodGroup">Select your Blood Group :</label>
+            <select name="bloodGroup" id="bloodGroup">
+                <option>Choose One</option>
+              <option value="a+">A+</option>
+              <option value="a-">A-</option>
+              <option value="b+">B+</option>
+              <option value="b-">B-</option>
+              <option value="b+">O+</option>
+              <option value="b-">O-</option>
+              <option value="b+">AB+</option>
+              <option value="b-">AB-</option>
+            </select>
+          </div>
+          <button class="registerButton" id="registerButton">Register</button>
+          <div class="loginBox">
+            <span>Already have an account? <a href="/login">Login</a></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+    <script>
+      function handleSubmit(e) {
+        e.preventDefault();
+          const name = e.srcElement[0].value;
+          const pass = e.srcElement[1].value;
+          const aadhaar = e.srcElement[2].value;
+          const age = e.srcElement[3].value;
+          const height = e.srcElement[4].value;
+          const weight = e.srcElement[5].value;
+          const creditNo = e.srcElement[6].value;
+          const bloodGroup = e.srcElement[7].value;
+          
+          const aadhaarRegex = /^[2-9]{1}[0-9]{11}$/;
+          const isValidAadhaar = aadhaarRegex.test(aadhaar);
+
+          if(name.trim().length===0){
+            alert("Name is required");
+            return false;
+          }
+          else if(pass.trim().length===0){
+            alert("Password is required");
+            return false;
+          }
+          else if(aadhaar.trim().length===0){
+            alert("Aadhaar No. is required");
+            return false;
+          }
+          else if(!isValidAadhaar){
+            alert("Invalid Aadhaar Input");
+            return false;
+          }
+          else if(age.trim().length===0){
+            alert("Age is required");
+            return false;
+          }
+          else if(height.trim().length===0){
+            alert("Height is required");
+            return false;
+          }
+          else if(weight.trim().length===0){
+            alert("Weight is required");
+            return false;
+          }
+          else if(creditNo.trim().length===0){
+            alert("Credit No. is required");
+            return false;
+          }
+          else if(bloodGroup.trim().length===0){
+            alert("Blood Group is required");
+            return false;
+          }
+          else if (pass.match(/[a-z]/g) && pass.match(/[A-Z]/g) && pass.match(/[0-9]/g) && pass.match(/[^a-zA-Z\d]/g) && pass.length >= 6) {
+              document.getElementById("registerForm").submit();
+              return true;
+          }
+          else {
+              alert("Password should contain: atleast 1 lowercase, 1 uppercase, 1 number & 1 special character with min length: 6")
+              return false;
+          }
+      }
+  </script>
+  </body>
+</html>

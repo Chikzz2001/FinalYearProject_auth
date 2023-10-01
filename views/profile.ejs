@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | BloodCamp</title>
+</head>
+<body>
+    <h2>Profile Page | BloodCamp</h2>
+    <h3>Hi <b id="fullname" style="color: red;"></b></h3>
+    
+    <h4 style="color: blue;">Welcome to the blood bank centre.</h4>
+
+    <h3>Your Data:</h3>
+    <ul>
+        <li>Aadhaar: <span id="aadhaar"></span></li>
+        <li>Credit Card: <span id="creditNo"></span></li>
+        <li>Age: <span id="age"></span></li>
+        <li>Height: <span id="height"></span></li>
+        <li>Weight: <span id="weight"></span></li>
+        <li>Blood Group: <span id="bloodGroup"></span></li>
+    </ul>
+
+    <a href="/logout">Logout Here</a>
+
+
+    <script>
+        const fullname = document.getElementById("fullname");
+        const aadhaar = document.getElementById("aadhaar");
+        const credit = document.getElementById("creditNo");
+        const height = document.getElementById("height");
+        const weight = document.getElementById("weight");
+        const bloodGroup = document.getElementById("bloodGroup");
+        const age = document.getElementById("age");
+        
+
+
+        const me = fetch("/user/me").then((result) => {
+            return result.json();
+        }).then((result) => {
+            console.log(result);
+            fullname.innerText = result.fullname;
+            aadhaar.innerText = result.aadhaar;
+            credit.innerText = result.creditNo;
+            age.innerText = result.age;
+            height.innerText = result.height;
+            weight.innerText = result.weight;
+            bloodGroup.innerText = result.bloodGroup;
+        }).catch((err) => {
+            console.log(err);
+        })
+    </script>
+</body>
+</html>
